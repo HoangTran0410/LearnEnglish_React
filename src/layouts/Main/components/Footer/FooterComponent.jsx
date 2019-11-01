@@ -31,14 +31,14 @@ export default function FooterComponent(props) {
         <div className="ft-main-item">
           <h2 className="ft-title">Stay Updated</h2>
           <p>Subscribe to our newsletter to get our latest news.</p>
-          <form>
+          <div className="form">
             <input
               type="email"
               name="email"
               placeholder="Enter email address"
             />
-            <input type="submit" value="Subscribe" />
-          </form>
+            <input type="button" value="Subscribe" />
+          </div>
         </div>
       </section>
 
@@ -80,7 +80,7 @@ export default function FooterComponent(props) {
 
 const StyledFooterContainer = styled.footer`
   flex: 1;
-  background-color: #011627;
+  background-color: #112d4e;
   color: #bbb;
   line-height: 1.5;
 
@@ -95,26 +95,25 @@ const StyledFooterContainer = styled.footer`
   a:hover {
     text-decoration: underline;
   }
-  .ft-title {
-    color: #fff;
-    font-size: 1.375rem;
-    padding-bottom: 0.625rem;
-  }
-  /* Sticks footer to bottom */
-  body {
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
-  }
-  .container {
-    flex: 1;
-  }
+
   /* Footer main */
   .ft-main {
     padding: 1.25rem 1.875rem;
     display: flex;
     flex-wrap: wrap;
+
+    .ft-main-item {
+      padding: 1.25rem;
+      min-width: 12.5rem;
+
+      .ft-title {
+        color: #fff;
+        font-size: 1.375rem;
+        padding-bottom: 0.625rem;
+      }
+    }
   }
+
   @media only screen and (min-width: 29.8125rem /* 477px */) {
     .ft-main {
       justify-content: space-evenly;
@@ -125,60 +124,62 @@ const StyledFooterContainer = styled.footer`
       justify-content: space-evenly;
     }
   }
-  .ft-main-item {
-    padding: 1.25rem;
-    min-width: 12.5rem;
-  }
 
   /* Footer main | Newsletter form */
-  form {
+  .form {
     display: flex;
-    flex-wrap: wrap;
-  }
-  input[type="email"] {
-    color: #333;
-    border: 0;
-    padding: 0.625rem;
-    margin-top: 0.3125rem;
-  }
-  input[type="submit"] {
-    background-color: #00d188;
-    color: #fff;
-    cursor: pointer;
-    border: 0;
-    padding: 0.625rem 0.9375rem;
-    margin-top: 0.3125rem;
+    /* flex-wrap: wrap; */
+
+    input[type="email"] {
+      color: #333;
+      border: 0;
+      padding: 0.625rem;
+      margin-top: 0.3125rem;
+    }
+    input[type="button"] {
+      background-color: #00d188;
+      color: #fff;
+      cursor: pointer;
+      border: 0;
+      padding: 0.625rem 0.9375rem;
+      margin-top: 0.3125rem;
+    }
   }
   /* Footer social */
   .ft-social {
     padding: 0 1.875rem 1.25rem;
-  }
-  .ft-social-list {
-    display: flex;
-    justify-content: center;
-    border-top: 1px #777 solid;
-    padding-top: 1.25rem;
-  }
-  .ft-social-list li {
-    margin: 0.5rem;
-    font-size: 1.25rem;
+
+    .ft-social-list {
+      display: flex;
+      justify-content: center;
+      border-top: 1px #777 solid;
+      padding-top: 1.25rem;
+
+      li {
+        margin: 0.5rem;
+        font-size: 1.25rem;
+      }
+    }
   }
   /* Footer legal */
   .ft-legal {
     padding: 0.9375rem 1.875rem;
     background-color: #00171f;
-  }
-  .ft-legal-list {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-  }
-  .ft-legal-list li {
-    margin: 0.125rem 0.625rem;
-    white-space: nowrap;
-  }
-  /* one before the last child */
-  .ft-legal-list li:nth-last-child(2) {
-    flex: 1;
+
+    .ft-legal-list {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+
+      li {
+        margin: 0.125rem 0.625rem;
+        white-space: nowrap;
+
+        /* one before the last child */
+        :nth-last-child(2) {
+          flex: 1;
+        }
+      }
+    }
   }
 `;
