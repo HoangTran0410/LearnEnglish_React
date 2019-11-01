@@ -9,7 +9,7 @@ export default function MainLayout(props) {
   return (
     <div>
       <Header />
-      {props.children}
+      <div>{props.children}</div>
       <BackTop visibilityHeight={200} />
       <Footer />
     </div>
