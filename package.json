@@ -4,9 +4,9 @@
   "private": true,
   "dependencies": {
     "antd": "^3.24.2",
-    "node-sass": "^4.13.0",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
+    "react-router-dom": "^5.1.2",
     "react-scripts": "3.2.0",
     "shortid": "^2.2.15",
     "styled-components": "^4.4.0"
