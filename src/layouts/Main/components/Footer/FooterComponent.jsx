@@ -37,7 +37,7 @@ export default function FooterComponent(props) {
               name="email"
               placeholder="Enter email address"
             />
-            <input type="button" value="Subscribe" />
+            <button>Subscribe</button>
           </div>
         </div>
       </section>
@@ -87,13 +87,17 @@ const StyledFooterContainer = styled.footer`
   ul {
     list-style: none;
     padding-left: 0;
-  }
-  a {
-    text-decoration: none;
-    color: #eee;
-  }
-  a:hover {
-    text-decoration: underline;
+
+    a {
+      text-decoration: none;
+      color: #eee;
+      display: block;
+
+      :hover {
+        color: #2196f3;
+        text-decoration: underline;
+      }
+    }
   }
 
   /* Footer main */
@@ -136,13 +140,18 @@ const StyledFooterContainer = styled.footer`
       padding: 0.625rem;
       margin-top: 0.3125rem;
     }
-    input[type="button"] {
-      background-color: #00d188;
+    button {
+      background-color: #3f72af;
       color: #fff;
       cursor: pointer;
       border: 0;
       padding: 0.625rem 0.9375rem;
       margin-top: 0.3125rem;
+      transition: 0.3s;
+
+      :hover {
+        background-color: #00d188;
+      }
     }
   }
   /* Footer social */
