@@ -4,7 +4,13 @@ import { Icon, Affix, Input } from "antd";
 import styled from "styled-components";
 
 export default class HeaderComponent extends Component {
+  state = {
+    showSearhBar: true
+  };
+
   render() {
+    const { showSearhBar } = this.state;
+
     return (
       <StyledHeaderContainer>
         <div className="header">
@@ -12,32 +18,41 @@ export default class HeaderComponent extends Component {
           <p>Better Way To Learn English.</p>
         </div>
 
-        <div className="topnav">
-          <div className="navs">
-            <a className="active" href="#home">
-              <Icon type="home" theme="filled" /> Trang chủ
-            </a>
-            <a href="#courses">
-              <Icon type="book" theme="filled" /> Khoá học
-            </a>
-            <a href="#footer">
-              <Icon type="mail" theme="filled" /> Liên hệ
-            </a>
-            <a href="#login">
-              <Icon type="user" /> Đăng nhập
-            </a>
+        <Affix offsetTop={0}>
+          <div className="topnav">
+            <div className="navs">
+              <button className="active">
+                <Icon type="home" theme="filled" />
+                <p>Trang chủ</p>
+              </button>
+              <button>
+                <Icon type="book" theme="filled" />
+                <p>Khoá học</p>
+              </button>
+              <button>
+                <Icon type="user" />
+                <p>Đăng nhập</p>
+              </button>
+              <button
+                className="toggle-search"
+                onClick={() => this.setState({ showSearhBar: !showSearhBar })}
+              >
+                <Icon type="search" />
+                <p>Tìm</p>
+              </button>
+            </div>
+            {showSearhBar && (
+              <div className="search-courses">
+                <Input.Search
+                  placeholder="Tìm khoá học..."
+                  enterButton
+                  size="large"
+                  onSearch={value => console.log(value)}
+                />
+              </div>
+            )}
           </div>
-          {/* <Affix offsetTop={0}> */}
-          <div className="search-courses">
-            <Input.Search
-              placeholder="Tìm khoá học..."
-              enterButton
-              size="large"
-              onSearch={value => console.log(value)}
-            />
-          </div>
-          {/* </Affix> */}
-        </div>
+        </Affix>
       </StyledHeaderContainer>
     );
   }
@@ -57,26 +72,40 @@ const StyledHeaderContainer = styled.header`
     justify-content: space-between;
     background-color: #3f72af;
 
-    .navs {
+    .navs,
+    .navs-mini {
       display: flex;
       flex-wrap: nowrap;
 
-      a {
+      button {
         display: block;
         color: white;
-        text-align: center;
-        padding: 14px 16px;
-        text-decoration: none;
         font-size: 17px;
+        text-align: center;
+        background: transparent;
+        padding: 14px 16px;
+        border: none;
+        cursor: pointer;
 
         :hover {
           background-color: #dbe2ef;
           color: #112d4e;
         }
 
+        p {
+          display: inline;
+          ::before {
+            content: " ";
+          }
+        }
+
         &.active {
           background-color: #2196f3;
           color: white;
+        }
+
+        &.toggle-search {
+          display: none;
         }
       }
     }
@@ -92,17 +121,26 @@ const StyledHeaderContainer = styled.header`
       overflow: auto;
 
       .navs {
-        flex-direction: column;
-        a {
+        button {
+          flex-grow: 1;
           display: block;
-          text-align: left;
           margin: 0;
-          padding: 14px;
+          padding: 5px;
+
+          &.toggle-search {
+            display: block;
+          }
+
+          p {
+            display: block;
+            font-size: 12px;
+            margin: 0;
+          }
         }
       }
 
       .search-courses {
-        padding: 10px;
+        padding: 5px;
         margin: 0;
       }
     }

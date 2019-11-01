@@ -15,7 +15,7 @@ const data = [
 export default function FooterComponent(props) {
   return (
     <StyledFooterContainer>
-      <section className="ft-main" id="footer">
+      <section className="ft-main">
         {data.map(({ title, list }) => (
           <div className="ft-main-item" key={title}>
             <h2 className="ft-title">{title}</h2>
