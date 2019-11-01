@@ -1,65 +1,67 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { Component } from "react";
+import React, { useState } from "react";
+
 import { Icon, Affix, Input } from "antd";
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
-export default class HeaderComponent extends Component {
-  state = {
-    showSearhBar: true
-  };
+export default function HeaderComponent(props) {
+  const [showSearhBar, toggleSearchBar] = useState(true);
+  // const [searchValue, setSearchValue] = useState("");
 
-  render() {
-    const { showSearhBar } = this.state;
+  return (
+    <StyledHeaderContainer>
+      <div className="big-header">
+        <h1>Learn English</h1>
+        <p>Better Way To Learn English.</p>
+      </div>
 
-    return (
-      <StyledHeaderContainer>
-        <div className="header">
-          <h1>Learn English</h1>
-          <p>Better Way To Learn English.</p>
-        </div>
+      <Affix offsetTop={0}>
+        <div className="topnav">
+          <div className="navs">
+            <NavLink exact to="/" activeClassName="active">
+              <Icon type="home" theme="filled" />
+              <p>Trang chủ</p>
+            </NavLink>
 
-        <Affix offsetTop={0}>
-          <div className="topnav">
-            <div className="navs">
-              <button className="active">
-                <Icon type="home" theme="filled" />
-                <p>Trang chủ</p>
-              </button>
-              <button>
-                <Icon type="book" theme="filled" />
-                <p>Khoá học</p>
-              </button>
-              <button>
-                <Icon type="user" />
-                <p>Đăng nhập</p>
-              </button>
-              <button
-                className="toggle-search"
-                onClick={() => this.setState({ showSearhBar: !showSearhBar })}
-              >
-                <Icon type="search" />
-                <p>Tìm</p>
-              </button>
-            </div>
-            {showSearhBar && (
-              <div className="search-courses">
-                <Input.Search
-                  placeholder="Tìm khoá học..."
-                  enterButton
-                  size="large"
-                  onSearch={value => console.log(value)}
-                />
-              </div>
-            )}
+            <NavLink to="/courses" activeClassName="active">
+              <Icon type="book" theme="filled" />
+              <p>Khoá học</p>
+            </NavLink>
+
+            <NavLink to="/login" activeClassName="active">
+              <Icon type="user" />
+              <p>Đăng nhập</p>
+            </NavLink>
+
+            <a
+              className="toggle-search"
+              onClick={() => toggleSearchBar(!showSearhBar)}
+            >
+              <Icon type="search" />
+              <p>Tìm</p>
+            </a>
           </div>
-        </Affix>
-      </StyledHeaderContainer>
-    );
-  }
+          {showSearhBar && (
+            <div className="search-courses">
+              <Input.Search
+                enterButton
+                placeholder="Tìm khoá học..."
+                size="large"
+                // value={searchValue}
+                // onChange={e => setSearchValue(e.target.value)}
+                onSearch={value => console.log(value)}
+              />
+            </div>
+          )}
+        </div>
+      </Affix>
+    </StyledHeaderContainer>
+  );
 }
 
 const StyledHeaderContainer = styled.header`
-  .header {
+  .big-header {
     padding: 60px;
     text-align: center;
     background: #00c5f9;
@@ -72,12 +74,12 @@ const StyledHeaderContainer = styled.header`
     justify-content: space-between;
     background-color: #3f72af;
 
-    .navs,
-    .navs-mini {
+    .navs {
       display: flex;
       flex-wrap: nowrap;
 
-      button {
+      a {
+        outline: none;
         display: block;
         color: white;
         font-size: 17px;
@@ -111,7 +113,11 @@ const StyledHeaderContainer = styled.header`
     }
 
     .search-courses {
+      display: flex;
+      justify-content: center;
+      align-items: center;
       margin: 5px;
+      transition: all 0.4s;
     }
   }
 
@@ -121,7 +127,7 @@ const StyledHeaderContainer = styled.header`
       overflow: auto;
 
       .navs {
-        button {
+        a {
           flex-grow: 1;
           display: block;
           margin: 0;
@@ -142,6 +148,7 @@ const StyledHeaderContainer = styled.header`
       .search-courses {
         padding: 5px;
         margin: 0;
+        background: #dbe2ef;
       }
     }
   }
