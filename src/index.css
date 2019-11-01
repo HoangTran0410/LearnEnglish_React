@@ -2,10 +2,12 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  outline: none;
 }
 
-html {
-  scroll-behavior: smooth;
+html,
+body {
+  height: 100%;
 }
 
 body {
@@ -17,12 +19,18 @@ body {
   -moz-osx-font-smoothing: grayscale;
 
   display: flex;
-  min-height: 100vh;
   flex-direction: column;
   align-items: flex-start;
+
+  background: #efefef;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+#root {
+  margin: auto;
+  width: 100%;
 }
