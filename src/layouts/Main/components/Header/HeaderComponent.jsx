@@ -62,7 +62,7 @@ export default function HeaderComponent(props) {
 
 const StyledHeaderContainer = styled.header`
   .big-header {
-    padding: 60px;
+    padding: 20px 70px;
     text-align: center;
     background: #00c5f9;
     color: white;
@@ -82,7 +82,6 @@ const StyledHeaderContainer = styled.header`
         outline: none;
         display: block;
         color: white;
-        font-size: 17px;
         text-align: center;
         background: transparent;
         padding: 14px 16px;
@@ -96,6 +95,7 @@ const StyledHeaderContainer = styled.header`
 
         p {
           display: inline;
+          font-size: 1.1em;
           ::before {
             content: " ";
           }
