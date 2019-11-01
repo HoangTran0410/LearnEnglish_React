@@ -14,17 +14,9 @@ function App() {
     <Router>
       <Switch>
 
-        <Route path="/">
-          <HomePage />
-        </Route>
-
-        <Route path="/courses">
-          <CoursesPage />
-        </Route>
-
-        <Route path="/login">
-          <LoginPage />
-        </Route>
+        <Route exact path="/" component={HomePage} />
+        <Route path="/courses" component={CoursesPage} />
+        <Route path="/login" component={LoginPage} />
 
       </Switch>
     </Router>
