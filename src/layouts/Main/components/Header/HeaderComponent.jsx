@@ -1,7 +1,8 @@
+/* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from "react";
 
-import { Icon, Affix, Input } from "antd";
+import { Icon, Affix, Input, Row, Col } from "antd";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
@@ -12,6 +13,7 @@ export default function HeaderComponent(props) {
   return (
     <StyledHeaderContainer>
       <div className="big-header">
+        <div className="img"></div>
         <h1>Learn English</h1>
         <p>Better Way To Learn English.</p>
       </div>
@@ -19,7 +21,7 @@ export default function HeaderComponent(props) {
       <Affix offsetTop={0}>
         <div className="topnav">
           <div className="navs">
-            <NavLink exact to="/" activeClassName="active">
+            <NavLink exact to="/home" activeClassName="active">
               <Icon type="home" theme="filled" />
               <p>Trang chủ</p>
             </NavLink>
@@ -62,10 +64,28 @@ export default function HeaderComponent(props) {
 
 const StyledHeaderContainer = styled.header`
   .big-header {
-    padding: 20px 70px;
-    text-align: center;
-    background: #00c5f9;
+    position: relative;
+    padding: 80px;
     color: white;
+    text-align: center;
+    color: white;
+
+    h1 {
+      color: white;
+    }
+
+    .img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url("https://analyticsindiamag.com/wp-content/uploads/2019/07/image_rec_lib_banner.jpg");
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center center;
+      z-index: -1;
+    }
   }
 
   .topnav {

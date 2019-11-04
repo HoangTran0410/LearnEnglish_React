@@ -45,17 +45,17 @@ export default function FooterComponent(props) {
       <section className="ft-social">
         <ul className="ft-social-list">
           {[
-            "facebook",
-            "twitter-circle",
-            "instagram",
-            "github",
-            "linkedin",
-            "youtube"
+            ["facebook", "Facebook"],
+            ["twitter-circle", "Twitter"],
+            ["instagram", "Instagram"],
+            ["github", "Github"],
+            ["linkedin", "Linkedin"],
+            ["youtube", "Youtube"]
           ].map(i => (
-            <li key={i}>
+            <li key={i[0]}>
               <a href="#">
-                <Tooltip title={i}>
-                  <Icon type={i} theme="filled" />
+                <Tooltip title={i[1]}>
+                  <Icon type={i[0]} theme="filled" />
                 </Tooltip>
               </a>
             </li>
@@ -80,7 +80,7 @@ export default function FooterComponent(props) {
 
 const StyledFooterContainer = styled.footer`
   flex: 1;
-  background-color: #112d4e;
+  background-color: #00264d;
   color: #bbb;
   line-height: 1.5;
 
@@ -92,6 +92,7 @@ const StyledFooterContainer = styled.footer`
       text-decoration: none;
       color: #eee;
       display: block;
+      margin-bottom: 10px;
 
       :hover {
         color: #2196f3;
@@ -112,6 +113,7 @@ const StyledFooterContainer = styled.footer`
 
       .ft-title {
         color: #fff;
+        font-weight: bold;
         font-size: 1.375rem;
         padding-bottom: 0.625rem;
       }
@@ -165,8 +167,8 @@ const StyledFooterContainer = styled.footer`
       padding-top: 1.25rem;
 
       li {
-        margin: 0.5rem;
-        font-size: 1.25rem;
+        padding: 0.5rem;
+        font-size: 1.5rem;
       }
     }
   }
