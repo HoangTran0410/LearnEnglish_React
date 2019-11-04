@@ -2,46 +2,49 @@
 
 import React from "react";
 import styled from "styled-components";
-import { Icon, Avatar } from "antd";
+import { Icon, Avatar, Tooltip } from "antd";
 
-const SocialCard = () => (
-  <StyledSocialCardContainer>
-    {/* <div className="fakeimg">
-      <p className="center">Images</p>
-    </div> */}
-    <img
-      src="https://cdn01.alison-static.net/courses/183/alison_courseware_intro_183.jpg"
-      alt="hey"
-    />
-    <div className="social_card_body">
-      <div className="social_basic_info">
-        <p>
-          @grammar @ielts
-          <br />
-          <span>June 14, 2019</span>
-        </p>
-        <Avatar size="large" icon="user" />
+export default function CourseCard(props) {
+  return (
+    <StyledSocialCardContainer>
+      <img src={props.data.thumbnail} alt="hey" />
+      <div className="social_card_body">
+        <div className="social_basic_info">
+          <p>
+            {props.data.tags.map(tag => `@${tag} `)}
+            <br />
+            <span>{props.data.last_update}</span>
+          </p>
+          <Avatar
+            size="large"
+            src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+          />
+        </div>
+
+        <p>{props.data.overview}</p>
+
+        <div className="social_interactions">
+          <p>
+            <Tooltip title={`${props.data.share} lượt chia sẻ`}>
+              <Icon type="share-alt" /> {props.data.share}
+            </Tooltip>
+          </p>
+          <p>
+            <Tooltip title={`${props.data.student} học sinh`}>
+              <Icon type="user" /> {props.data.student}
+            </Tooltip>
+          </p>
+          <p>
+            <Tooltip title={`${props.data.love} lượt thích`}>
+              <Icon type="heart" theme="filled" /> {props.data.love}
+            </Tooltip>
+          </p>
+        </div>
       </div>
-
-      <p>Here is a custom status with some text and stuff...</p>
-
-      <div className="social_interactions">
-        <p>
-          <Icon type="share-alt" /> 492
-        </p>
-        <p>
-          <Icon type="retweet" /> 3,843
-        </p>
-        <p>
-          <Icon type="heart" theme="filled" /> 1,336
-        </p>
-      </div>
-    </div>
-    <button className="open-btn">Xem chi tiết</button>
-  </StyledSocialCardContainer>
-);
-
-export default SocialCard;
+      <button className="open-btn">Xem chi tiết</button>
+    </StyledSocialCardContainer>
+  );
+}
 
 const StyledSocialCardContainer = styled.div`
   max-width: 280px;
@@ -76,8 +79,11 @@ const StyledSocialCardContainer = styled.div`
       display: flex;
       justify-content: space-between;
       align-items: center;
+      margin-bottom: 15px;
+
       p {
         font-weight: bold;
+        margin: 0;
       }
     }
 
@@ -88,7 +94,6 @@ const StyledSocialCardContainer = styled.div`
       p {
         display: flex;
         align-items: center;
-        cursor: pointer;
         margin: 0;
 
         /* icon */
