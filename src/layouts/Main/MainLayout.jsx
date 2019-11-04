@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from "react";
+import React, { Fragment } from "react";
 import { BackTop } from "antd";
 
 import Header from "./components/Header";
@@ -7,11 +7,11 @@ import Footer from "./components/Footer";
 
 export default function MainLayout(props) {
   return (
-    <div>
+    <Fragment>
       <Header />
-      <div>{props.children}</div>
+      {props.children}
       <BackTop visibilityHeight={200} />
       <Footer />
-    </div>
+    </Fragment>
   );
 }
