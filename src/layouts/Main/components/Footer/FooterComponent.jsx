@@ -111,6 +111,10 @@ const StyledFooterContainer = styled.footer`
       padding: 1.25rem;
       min-width: 12.5rem;
 
+      p {
+        color: #eee;
+      }
+
       .ft-title {
         color: #fff;
         font-weight: bold;

@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from "react";
 
-import { Icon, Affix, Input, Row, Col } from "antd";
+import { Icon, Affix, Input } from "antd";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
@@ -12,9 +12,11 @@ export default function HeaderComponent(props) {
 
   return (
     <StyledHeaderContainer>
-      <div className="big-header">
-        <div className="img"></div>
-        <h1>Learn English</h1>
+      <div className="big_header">
+        <div className="bg_img"></div>
+        <h1 className="logo_text">
+          Lea<span>Eng</span>
+        </h1>
         <p>Better Way To Learn English.</p>
       </div>
 
@@ -45,7 +47,7 @@ export default function HeaderComponent(props) {
             </a>
           </div>
           {showSearhBar && (
-            <div className="search-courses">
+            <div className="search_courses">
               <Input.Search
                 enterButton
                 placeholder="Tìm khoá học..."
@@ -63,18 +65,19 @@ export default function HeaderComponent(props) {
 }
 
 const StyledHeaderContainer = styled.header`
-  .big-header {
+  .big_header {
     position: relative;
-    padding: 80px;
+    padding-top: 150px;
+    padding-bottom: 150px;
     color: white;
     text-align: center;
     color: white;
 
     h1 {
-      color: white;
+      /* color: white; */
     }
 
-    .img {
+    .bg_img {
       position: absolute;
       top: 0;
       left: 0;
@@ -85,6 +88,7 @@ const StyledHeaderContainer = styled.header`
       background-size: cover;
       background-position: center center;
       z-index: -1;
+      filter: brightness(0.5);
     }
   }
 
@@ -107,6 +111,7 @@ const StyledHeaderContainer = styled.header`
         padding: 14px 16px;
         border: none;
         cursor: pointer;
+        text-decoration: none;
 
         :hover {
           background-color: #dbe2ef;
@@ -116,6 +121,7 @@ const StyledHeaderContainer = styled.header`
         p {
           display: inline;
           font-size: 1.1em;
+          color: inherit;
           ::before {
             content: " ";
           }
@@ -132,7 +138,7 @@ const StyledHeaderContainer = styled.header`
       }
     }
 
-    .search-courses {
+    .search_courses {
       display: flex;
       justify-content: center;
       align-items: center;
@@ -142,6 +148,11 @@ const StyledHeaderContainer = styled.header`
   }
 
   @media screen and (max-width: 700px) {
+    .big_header {
+      padding-top: 50px;
+      padding-bottom: 50px;
+    }
+
     .topnav {
       flex-direction: column;
       overflow: auto;
@@ -165,7 +176,7 @@ const StyledHeaderContainer = styled.header`
         }
       }
 
-      .search-courses {
+      .search_courses {
         padding: 5px;
         margin: 0;
         background: #dbe2ef;
