@@ -1,6 +1,8 @@
 import React from "react";
 import { Icon, Avatar } from "antd";
-import { NavLink } from "react-router-dom";
+// import { NavLink } from "react-router-dom";
+
+const testBackend = () => {};
 
 const CourseCard = props => {
   const {
@@ -12,8 +14,9 @@ const CourseCard = props => {
     rating,
     videos_count
   } = props.data;
+  // to="/courses"
   return (
-    <NavLink to="/courses" className="course trans_200">
+    <button onClick={testBackend} className="course trans_200">
       <div className="course_image">
         <img src={image} alt="" />
       </div>
@@ -43,7 +46,7 @@ const CourseCard = props => {
           </div>
         </div>
       </div>
-    </NavLink>
+    </button>
   );
 };
 

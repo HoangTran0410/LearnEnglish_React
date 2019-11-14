@@ -334,6 +334,9 @@ section {
 .course {
   display: block;
   width: 100%;
+  border: none;
+  text-align: left;
+  cursor: pointer;
   border-radius: 6px;
   background: #ffffff;
   box-shadow: 0px 1px 5px rgba(29, 34, 47, 0.1);
