@@ -8,9 +8,13 @@ module.exports = function (app) {
     //End user
     
     //Begin course
-    app.use(require('./api/course/getCourse/getCourse'));
+    app.use(require('./api/course/getListCourse'));
+    app.use(require('./api/course/getCourseDetail/getCourse'));
     //End course
 
+    //Begin lecture
+    app.use(require('./api/course/getCourseDetail/getListLecture'));
+    //End lecture
     //Begin topic
 
     //End topic
