@@ -2,8 +2,11 @@
 import React, { Fragment } from "react";
 import { BackTop } from "antd";
 
-import Header from "./components/Header";
-import Footer from "./components/Footer";
+const Header = React.lazy(() => import("./components/Header"));
+const Footer = React.lazy(() => import("./components/Footer"));
+const NewLetter = React.lazy(() =>
+  import("../../commons/components/Newletter")
+);
 
 export default function MainLayout(props) {
   return (
@@ -11,6 +14,7 @@ export default function MainLayout(props) {
       <Header />
       {props.children}
       <BackTop visibilityHeight={200} />
+      <NewLetter />
       <Footer />
     </Fragment>
   );
