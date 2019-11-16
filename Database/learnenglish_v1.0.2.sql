@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 14, 2019 lúc 07:42 AM
+-- Thời gian đã tạo: Th10 14, 2019 lúc 04:28 PM
 -- Phiên bản máy phục vụ: 10.1.37-MariaDB
 -- Phiên bản PHP: 7.3.0
 
@@ -104,6 +104,34 @@ CREATE TABLE `comment` (
 -- --------------------------------------------------------
 
 --
+-- Cấu trúc bảng cho bảng `course`
+--
+
+CREATE TABLE `course` (
+  `ID` int(11) NOT NULL,
+  `Title` varchar(500) NOT NULL,
+  `Level` int(11) NOT NULL,
+  `Picture` varchar(500) NOT NULL,
+  `Description` varchar(1000) NOT NULL,
+  `WhatWillYouLearn` varchar(500) NOT NULL,
+  `Requirement` varchar(1000) NOT NULL,
+  `CreatedDate` date NOT NULL,
+  `LastModifiedDate` date NOT NULL,
+  `Status` int(1) NOT NULL,
+  `TopicID` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Đang đổ dữ liệu cho bảng `course`
+--
+
+INSERT INTO `course` (`ID`, `Title`, `Level`, `Picture`, `Description`, `WhatWillYouLearn`, `Requirement`, `CreatedDate`, `LastModifiedDate`, `Status`, `TopicID`) VALUES
+(1, 'Basic pronoun', 1, 'linkpicture', 'Khoa hoc giup tang cường khả năng học của bla bla', 'Cách phát âm căn bản', 'Biết từ vựng mức độ phổ thông', '2019-11-13', '2019-11-06', 0, 1),
+(2, 'name course', 1, 'link picture', 'gádgsg', 'agsdgwt', 'dgrwgtretg', '2019-11-13', '2019-11-15', 0, 1);
+
+-- --------------------------------------------------------
+
+--
 -- Cấu trúc bảng cho bảng `lecture`
 --
 
@@ -156,6 +184,26 @@ CREATE TABLE `rate` (
 
 INSERT INTO `rate` (`ID`, `AccountID`, `Start`, `Content`, `CreatedDate`, `CourseID`) VALUES
 (1, 6, 2, 'vxf', '2019-11-14', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `record`
+--
+
+CREATE TABLE `record` (
+  `ID` int(11) NOT NULL,
+  `AccountID` int(11) NOT NULL,
+  `CourseID` int(11) NOT NULL,
+  `JoinedDate` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Đang đổ dữ liệu cho bảng `record`
+--
+
+INSERT INTO `record` (`ID`, `AccountID`, `CourseID`, `JoinedDate`) VALUES
+(1, 6, 1, '2019-11-14');
 
 -- --------------------------------------------------------
 
@@ -250,6 +298,13 @@ ALTER TABLE `comment`
   ADD KEY `LectureID` (`LectureID`);
 
 --
+-- Chỉ mục cho bảng `course`
+--
+ALTER TABLE `course`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `TopicID` (`TopicID`);
+
+--
 -- Chỉ mục cho bảng `lecture`
 --
 ALTER TABLE `lecture`
@@ -267,6 +322,14 @@ ALTER TABLE `question`
 -- Chỉ mục cho bảng `rate`
 --
 ALTER TABLE `rate`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `AccountID` (`AccountID`),
+  ADD KEY `CourseID` (`CourseID`);
+
+--
+-- Chỉ mục cho bảng `record`
+--
+ALTER TABLE `record`
   ADD PRIMARY KEY (`ID`),
   ADD KEY `AccountID` (`AccountID`),
   ADD KEY `CourseID` (`CourseID`);
@@ -319,6 +382,12 @@ ALTER TABLE `comment`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT cho bảng `course`
+--
+ALTER TABLE `course`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT cho bảng `lecture`
 --
 ALTER TABLE `lecture`
@@ -334,6 +403,12 @@ ALTER TABLE `question`
 -- AUTO_INCREMENT cho bảng `rate`
 --
 ALTER TABLE `rate`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT cho bảng `record`
+--
+ALTER TABLE `record`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
@@ -379,6 +454,12 @@ ALTER TABLE `comment`
   ADD CONSTRAINT `comment_ibfk_2` FOREIGN KEY (`LectureID`) REFERENCES `lecture` (`ID`);
 
 --
+-- Các ràng buộc cho bảng `course`
+--
+ALTER TABLE `course`
+  ADD CONSTRAINT `course_ibfk_1` FOREIGN KEY (`TopicID`) REFERENCES `topic` (`ID`);
+
+--
 -- Các ràng buộc cho bảng `lecture`
 --
 ALTER TABLE `lecture`
@@ -396,6 +477,13 @@ ALTER TABLE `question`
 ALTER TABLE `rate`
   ADD CONSTRAINT `rate_ibfk_2` FOREIGN KEY (`AccountID`) REFERENCES `account` (`ID`),
   ADD CONSTRAINT `rate_ibfk_3` FOREIGN KEY (`CourseID`) REFERENCES `course` (`ID`);
+
+--
+-- Các ràng buộc cho bảng `record`
+--
+ALTER TABLE `record`
+  ADD CONSTRAINT `record_ibfk_1` FOREIGN KEY (`AccountID`) REFERENCES `account` (`ID`),
+  ADD CONSTRAINT `record_ibfk_2` FOREIGN KEY (`CourseID`) REFERENCES `course` (`ID`);
 
 --
 -- Các ràng buộc cho bảng `section`
