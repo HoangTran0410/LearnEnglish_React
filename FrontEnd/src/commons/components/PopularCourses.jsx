@@ -1,5 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
+
 import CourseCard from "./CourseCard";
 import { courses } from "../../utils/fakedata";
 
@@ -24,7 +26,7 @@ export default class PopularCourses extends Component {
             </div>
           </div>
           <div className="row courses_row">
-            {courses.map(course => (
+            {courses.slice(0, 3).map(course => (
               <div className="col-lg-4 course_col" key={course.title}>
                 <CourseCard data={course} />
               </div>
@@ -33,7 +35,7 @@ export default class PopularCourses extends Component {
           <div className="row">
             <div className="col">
               <div className="courses_button trans_200">
-                <a href="#">view all courses</a>
+                <Link to="/courses">view all courses</Link>
               </div>
             </div>
           </div>
