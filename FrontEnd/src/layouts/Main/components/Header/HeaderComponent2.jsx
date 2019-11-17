@@ -1,6 +1,24 @@
 import React, { Component } from "react";
-import { NavLink } from "react-router-dom";
-import { Icon } from "antd";
+import { NavLink, Link } from "react-router-dom";
+import { Icon, Menu, Dropdown, message } from "antd";
+
+const onClickMenu = ({ key }) => {
+  message.info(`Click on item ${key}`);
+};
+
+const userMenu = (
+  <Menu onClick={onClickMenu}>
+    <Menu.Item key="ho so">
+      <Icon type="compass" /> Hồ sơ
+    </Menu.Item>
+    <Menu.Item key="cai dat">
+      <Icon type="setting" /> Cài đặt
+    </Menu.Item>
+    <Menu.Item key="dang xuat">
+      <Icon type="logout" /> Đăng xuất
+    </Menu.Item>
+  </Menu>
+);
 
 export default class HeaderComponent2 extends Component {
   constructor(props) {
@@ -13,9 +31,11 @@ export default class HeaderComponent2 extends Component {
     };
 
     window.onscroll = e => {
-      if (window.pageYOffset > 100) {
-        this.setState({ scrolled: true });
-      } else if (window.pageYOffset === 0) {
+      const { scrolled } = this.state;
+
+      if (window.pageYOffset > 130) {
+        if (!scrolled) this.setState({ scrolled: true });
+      } else if (scrolled) {
         this.setState({ scrolled: false });
       }
     };
@@ -61,7 +81,7 @@ export default class HeaderComponent2 extends Component {
                       </ul>
                       <div className="top_bar_login ml-auto">
                         <div className="login_button">
-                          <NavLink to="/login">Register or Login</NavLink>
+                          <Link to="/login">Đăng nhập / Đăng ký</Link>
                         </div>
                       </div>
                     </div>
@@ -78,27 +98,27 @@ export default class HeaderComponent2 extends Component {
                 <div className="col">
                   <div className="header_content d-flex flex-row align-items-center justify-content-start">
                     <div className="logo_container">
-                      <a href="/">
+                      <Link to="/">
                         <div className="logo_text">
                           <span>L</span>ea<span>E</span>ng
                         </div>
-                      </a>
+                      </Link>
                     </div>
                     <nav className="main_nav_contaner ml-auto">
                       <ul className="main_nav">
                         <li>
                           <NavLink exact to="/home" activeClassName="active">
-                            Home
+                            Trang chủ
                           </NavLink>
                         </li>
                         <li>
                           <NavLink to="/about" activeClassName="active">
-                            About
+                            Giới thiệu
                           </NavLink>
                         </li>
                         <li>
                           <NavLink to="/courses" activeClassName="active">
-                            Courses
+                            Khoá học
                           </NavLink>
                         </li>
                         <li>
@@ -106,16 +126,16 @@ export default class HeaderComponent2 extends Component {
                             Blog
                           </NavLink>
                         </li>
-                        <li>
+                        {/* <li>
                           <NavLink to="/page" activeClassName="active">
-                            Page
+                            Trang
                           </NavLink>
                         </li>
                         <li>
                           <NavLink to="/contact" activeClassName="active">
-                            Contact
+                            Liên hệ
                           </NavLink>
-                        </li>
+                        </li> */}
                       </ul>
                       <div
                         className="search_button"
@@ -125,10 +145,12 @@ export default class HeaderComponent2 extends Component {
                       </div>
 
                       {/* <!-- Hamburger --> */}
+                      <Dropdown overlay={userMenu} placement="bottomCenter">
+                        <div className="user">
+                          <Icon type="user" />
+                        </div>
+                      </Dropdown>
 
-                      <div className="shopping_cart">
-                        <Icon type="shopping" />
-                      </div>
                       <div
                         className="hamburger menu_mm"
                         onClick={this.toogleSideMenu}
@@ -181,10 +203,10 @@ export default class HeaderComponent2 extends Component {
             </div>
           </div>
           <div className="search">
-            <form action="#" className="header_search_form menu_mm">
+            <form action="#" className="header_search_form">
               <input
                 type="search"
-                className="search_input menu_mm"
+                className="search_input"
                 placeholder="Search"
                 required="required"
               />
@@ -194,37 +216,37 @@ export default class HeaderComponent2 extends Component {
             </form>
           </div>
           <nav className="menu_nav">
-            <ul className="menu_mm">
-              <li className="menu_mm">
+            <ul>
+              <li>
                 <NavLink exact to="/home" activeClassName="active">
-                  Home
+                  Trang chủ
                 </NavLink>
               </li>
-              <li className="menu_mm">
+              <li>
                 <NavLink to="/about" activeClassName="active">
-                  About
+                  Giới thiệu
                 </NavLink>
               </li>
-              <li className="menu_mm">
+              <li>
                 <NavLink to="/courses" activeClassName="active">
-                  Courses
+                  Khoá học
                 </NavLink>
               </li>
-              <li className="menu_mm">
+              <li>
                 <NavLink to="/blog" activeClassName="active">
                   Blog
                 </NavLink>
               </li>
-              <li className="menu_mm">
+              {/* <li>
                 <NavLink to="/page" activeClassName="active">
                   Page
                 </NavLink>
               </li>
-              <li className="menu_mm">
+              <li>
                 <NavLink to="/contact" activeClassName="active">
-                  Contact
+                  Liên hệ
                 </NavLink>
-              </li>
+              </li> */}
             </ul>
           </nav>
         </div>

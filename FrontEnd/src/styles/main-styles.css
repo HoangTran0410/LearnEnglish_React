@@ -368,7 +368,7 @@ section {
 } */
 .main_nav,
 .search_button,
-.shopping_cart {
+.user {
   display: inline-block;
 }
 .main_nav li {
@@ -407,12 +407,12 @@ section {
   margin-left: 46px;
   cursor: pointer;
 }
-.shopping_cart {
+.user {
   margin-left: 23px;
   cursor: pointer;
 }
 .search_button i,
-.shopping_cart i {
+.user i {
   font-size: 18px;
   color: #181818;
   -webkit-transition: all 200ms ease;
@@ -422,7 +422,7 @@ section {
   transition: all 200ms ease;
 }
 .search_button:hover i,
-.shopping_cart:hover i {
+.user:hover i {
   color: #14bdee;
 }
 .header_search_form {
@@ -505,9 +505,8 @@ section {
   height: 100vh;
   background: #ffffff;
   z-index: 101;
-  padding-right: 60px;
-  padding-top: 87px;
-  padding-left: 50px;
+  padding: 87px 40px;
+  overflow: scroll;
 }
 .menu .logo a {
   color: #000000;
@@ -575,7 +574,8 @@ section {
   -o-transition: all 200ms ease;
   transition: all 200ms ease;
 }
-.menu_nav ul li a:hover {
+.menu_nav ul li a:hover,
+.menu_nav ul li a.active {
   color: #14bdee;
 }
 .menu .search {
@@ -659,7 +659,8 @@ section {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url("../assets/images/teams/team_background.jpg");
+  /* background-image: url("../assets/images/teams/team_background.jpg"); */
+  background-image: url("../assets/svg animations/ball-wed.svg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
@@ -671,7 +672,6 @@ section {
 
 .home {
   width: 100%;
-  height: 850px;
 }
 .home_slider_container {
   width: 100%;
@@ -692,9 +692,8 @@ section {
   background-position: center center;
 }
 .home_slider_content {
-  position: absolute;
-  top: 41%;
-  left: 0;
+  margin: auto;
+  padding: 150px 0;
   width: 100%;
   height: auto;
 }
@@ -795,7 +794,7 @@ section {
   position: absolute;
   top: 55.8%;
   width: 50px;
-  background: #b6b7bd;
+  background: #b6b7bd99;
   border-radius: 50%;
   text-align: center;
   z-index: 10;
@@ -1445,12 +1444,12 @@ section {
 .course_col {
   margin-bottom: 51px;
 }
-.course_col:nth-child(odd) {
+/* .course_col:nth-child(odd) {
   padding-right: 30px;
 }
 .course_col:nth-child(even) {
   padding-left: 30px;
-}
+} */
 
 .pagination_row {
   margin: 20px auto 50px;
@@ -1854,10 +1853,11 @@ section {
   display: block;
   position: relative;
   text-align: center;
+  line-height: 45px;
 }
 .footer_social ul li a i {
   color: #ffffff;
-  line-height: 45px;
+  font-size: 23px;
 }
 .footer_social ul li:hover {
   background: #14bdee;
