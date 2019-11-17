@@ -1,3 +1,9 @@
+.lds-heart-container {
+  width: 100%;
+  padding: 20;
+  text-align: center;
+}
+
 .lds-heart {
   display: inline-block;
   position: relative;

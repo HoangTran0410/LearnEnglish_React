@@ -18,11 +18,10 @@ const PopularCourses = React.lazy(() => import('../commons/components/PopularCou
 const UpcomingEvents = React.lazy(() => import('../commons/components/UpcomingEvents'));
 const About = React.lazy(() => import('../commons/components/About'));
 
-
 export default class HomePage extends Component {
   render() {
     return (
-      <Suspense fallback={<LoadingComponent text="Đang tải trang chủ" />}>
+      <Suspense fallback={<LoadingComponent />}>
         <Slideshow />
         <Features />
         <About />
