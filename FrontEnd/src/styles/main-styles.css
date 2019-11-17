@@ -516,8 +516,8 @@ section {
 }
 .menu_close_container {
   position: absolute;
-  top: 30px;
-  right: 60px;
+  top: 40px;
+  right: 40px;
   width: 18px;
   height: 18px;
   transform-origin: center center;
@@ -772,6 +772,7 @@ section {
   background-image: url(../assets/images/down.png);
   background-position: center right;
   background-repeat: no-repeat;
+  background-color: white;
   padding-right: 20px;
   padding-left: 20px;
 }

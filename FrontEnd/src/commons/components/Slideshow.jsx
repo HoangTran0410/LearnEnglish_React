@@ -70,12 +70,12 @@ export default function Slideshow() {
       </div>
 
       {/* <!-- Home Slider Nav --> */}
-      <div className="home_slider_nav home_slider_prev">
+      {/* <div className="home_slider_nav home_slider_prev">
         <Icon type="left" />
       </div>
       <div className="home_slider_nav home_slider_next">
         <Icon type="right" />
-      </div>
+      </div> */}
     </div>
   );
 }
