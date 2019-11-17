@@ -26,8 +26,11 @@ export default class PopularCourses extends Component {
             </div>
           </div>
           <div className="row courses_row">
-            {courses.slice(0, 3).map(course => (
-              <div className="col-lg-4 course_col" key={course.title}>
+            {courses.slice(0, 3).map((course, index) => (
+              <div
+                className="col-lg-4 course_col"
+                key={"popular-courses-card-" + index}
+              >
                 <CourseCard data={course} />
               </div>
             ))}

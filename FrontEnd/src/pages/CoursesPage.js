@@ -33,8 +33,8 @@ export default class HomePage extends Component {
               </div>
               <div className="courses_container">
                 <div className="row courses_row">
-                  {courses.map(course => (
-                    <div className="col-lg-6 course_col" key={course.title}>
+                  {courses.map((course, index) => (
+                    <div className="col-lg-6 course_col" key={"courses-card-" + index}>
                       <CourseCard data={course} />
                     </div>
                   ))}
