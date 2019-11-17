@@ -2,6 +2,7 @@ import React from "react";
 import { Icon } from "antd";
 
 const img = require("../../assets/images/slider/home_slider_1.jpg");
+const img2 = require("../../assets/svg animations/ball-wed.svg");
 
 export default function Slideshow() {
   return (
@@ -14,6 +15,12 @@ export default function Slideshow() {
             className="home_slider_background"
             style={{
               backgroundImage: `url(${img})`
+            }}
+          ></div>
+          <div
+            className="home_slider_background"
+            style={{
+              backgroundImage: `url(${img2})`
             }}
           ></div>
           <div className="home_slider_content">
