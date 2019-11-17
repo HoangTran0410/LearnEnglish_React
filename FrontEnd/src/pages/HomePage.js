@@ -1,4 +1,4 @@
-import React, { Component, Fragment, Suspense } from 'react'
+import React, { Component, Suspense } from 'react'
 
 // import Slideshow from '../commons/components/Slideshow';
 // import Features from '../commons/components/Features';
@@ -8,7 +8,7 @@ import React, { Component, Fragment, Suspense } from 'react'
 // import UpcomingEvents from '../commons/components/UpcomingEvents';
 // import About from '../commons/components/About';
 
-import LoadingComponent from '../commons/components/LoadingComponent'
+import LoadingComponent from '../commons/components/LoadingComponent/LoadingComponent'
 
 const Slideshow = React.lazy(() => import('../commons/components/Slideshow'));
 const Features = React.lazy(() => import('../commons/components/Features'));
@@ -22,7 +22,7 @@ const About = React.lazy(() => import('../commons/components/About'));
 export default class HomePage extends Component {
   render() {
     return (
-      <Suspense fallback={<LoadingComponent text="Đang tải trang chủ ..." />}>
+      <Suspense fallback={<LoadingComponent text="Đang tải trang chủ" />}>
         <Slideshow />
         <Features />
         <About />

@@ -12,7 +12,7 @@ import {
 // import LoginPage from './pages/LoginPage';
 // import MainLayout from './layouts/Main';
 // import AutoScrollToTop from './commons/components/AutoScrollToTop';
-import LoadingComponent from './commons/components/LoadingComponent';
+import LoadingComponent from './commons/components/LoadingComponent/LoadingComponent';
 import 'antd/dist/antd.css';
 
 const HomePage = React.lazy(() => import('./pages/HomePage'));
@@ -48,6 +48,13 @@ function App() {
                 <LoginPage />
               </MainLayout>
             </Route>
+
+            <Route>
+              <MainLayout>
+                <h2 style={{ textAlign: 'center', padding: 100 }}>Not Thing Yet</h2>
+              </MainLayout>
+            </Route>
+
           </Switch>
         </AutoScrollToTop>
       </Router>

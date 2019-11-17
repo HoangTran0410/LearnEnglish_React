@@ -12,7 +12,7 @@ export default function MainLayout(props) {
   return (
     <Fragment>
       <Header />
-      {props.children}
+      <div style={{ margin: "130px auto 0" }}>{props.children}</div>
       <BackTop visibilityHeight={200} />
       <NewLetter />
       <Footer />
