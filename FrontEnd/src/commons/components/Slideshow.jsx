@@ -36,7 +36,7 @@ export default function Slideshow() {
                         <input
                           type="search"
                           className="home_search_input"
-                          placeholder="Từ khoá tìm kiếm"
+                          placeholder="Từ khoá"
                           required="required"
                         />
                         <select className="dropdown_item_select home_search_input">
