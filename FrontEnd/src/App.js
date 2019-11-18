@@ -43,36 +43,26 @@ function Container() {
     <ErrorBoundary>
       <Suspense fallback={loadingFullPage}>
 
-        <MainLayout>
+        <MainLayout adminRoutes={["/admin"]} frontPageRoutes={["/home", "/", "/courses", "/login"]}>
           <AutoScrollToTop>
             <Switch>
-              <Route exact path="/">
-                <Redirect replace to="/home" />
-              </Route>
 
-              <Route path="/home">
-                {/* <MainLayout> */}
+              <Route path={["/home", "/"]}>
                 <HomePage />
-                {/* </MainLayout> */}
               </Route>
 
               <Route path="/courses">
-                {/* <MainLayout> */}
                 <CoursesPage />
-                {/* </MainLayout> */}
               </Route>
 
               <Route path="/login">
-                {/* <MainLayout> */}
                 <LoginPage />
-                {/* </MainLayout> */}
               </Route>
 
               <Route>
-                {/* <MainLayout> */}
                 <h2 style={{ textAlign: 'center', padding: 100 }}>Not Thing Yet</h2>
-                {/* </MainLayout> */}
               </Route>
+
             </Switch>
           </AutoScrollToTop>
         </MainLayout>
