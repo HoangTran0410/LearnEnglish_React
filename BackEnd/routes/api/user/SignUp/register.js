@@ -30,25 +30,28 @@ register.post('/register', function (req, res, next) {
     var passWord = req.body.passWord;
     var fullName = req.body.fullName;
     var email = req.body.email;
-    var registerDate = req.body.registerDate;
     var birthday = req.body.birthday;
     //Begin Encode password
     var encodePassWord = crypto.AES.encrypt(passWord, secret.EncodePass).toString();
     //End 
-    if (userName && passWord && fullName && email && registerDate && birthday) {
-        var sql = 'INSERT INTO account(`UserName`, `Password`, `FullName`, `Birthday`, `Email`, `RegisterDate`, `Status`) VALUES (?,?,?,?,?,?,?)';
+    if (userName && passWord && fullName && email && birthday) {
+        var sql = 'INSERT INTO account(`UserName`, `Password`, `FullName`, `Birthday`, `Email`, `RegisterDate`, `Status`) VALUES (?,?,?,?,?,CURRENT_DATE,?)';
         var values =
-            [userName, encodePassWord, fullName, birthday, email, registerDate, 0];
+            [userName, encodePassWord, fullName, birthday, email, 0];
         connection.query(sql, values, function (error, results) {
             if (error) {
-                res.end('loi');
+                res.send({
+                    status : 0
+                });
                 return;
             };
             console.log("1 record inserted");
         });
 
     }
-    res.end('da them');
+    res.send({
+        status : 1
+    });
 });
 
 module.exports = register;
