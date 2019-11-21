@@ -8,20 +8,20 @@ import React, { Component, Suspense } from 'react'
 // import UpcomingEvents from '../commons/components/UpcomingEvents';
 // import About from '../commons/components/About';
 
-import LoadingComponent from '../commons/components/LoadingComponent/LoadingComponent'
+import HeartLoading from '../commons/components/HeartLoading';
 
-const Slideshow = React.lazy(() => import('../commons/components/Slideshow'));
-const Features = React.lazy(() => import('../commons/components/Features'));
-const Team = React.lazy(() => import('../commons/components/Team'));
-const Counter = React.lazy(() => import('../commons/components/Counter'));
-const PopularCourses = React.lazy(() => import('../commons/components/PopularCourses'));
-const UpcomingEvents = React.lazy(() => import('../commons/components/UpcomingEvents'));
-const About = React.lazy(() => import('../commons/components/About'));
+const Slideshow = React.lazy(() => import('../commons/HomePage/Slideshow'));
+const Features = React.lazy(() => import('../commons/HomePage/Features'));
+const Team = React.lazy(() => import('../commons/HomePage/Team'));
+const Counter = React.lazy(() => import('../commons/HomePage/Counter'));
+const PopularCourses = React.lazy(() => import('../commons/HomePage/PopularCourses'));
+const UpcomingEvents = React.lazy(() => import('../commons/HomePage/UpcomingEvents'));
+const About = React.lazy(() => import('../commons/HomePage/About'));
 
 export default class HomePage extends Component {
   render() {
     return (
-      <Suspense fallback={<LoadingComponent />}>
+      <Suspense fallback={<HeartLoading />}>
         <Slideshow />
         <Features />
         <About />

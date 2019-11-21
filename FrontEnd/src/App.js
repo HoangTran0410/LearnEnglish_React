@@ -1,74 +1,55 @@
 import React, { Suspense } from 'react';
 import {
-  // BrowserRouter as Router,
   Switch,
   Route,
-  HashRouter,
-  Redirect
+  HashRouter
 } from "react-router-dom";
 
-// import { TransitionGroup, CSSTransition } from "react-transition-group";
-
-import ErrorBoundary from './commons/components/ErrorBoundary';
-import LoadingComponent from './commons/components/LoadingComponent/LoadingComponent';
-
-// import HomePage from './pages/HomePage';
-// import CoursesPage from './pages/CoursesPage';
-// import LoginPage from './pages/LoginPage';
-// import MainLayout from './layouts/Main';
-// import AutoScrollToTop from './commons/components/AutoScrollToTop';
+import HeartLoading from './commons/components/HeartLoading';
 
 const HomePage = React.lazy(() => import('./pages/HomePage'));
 const CoursesPage = React.lazy(() => import('./pages/CoursesPage'));
 const LoginPage = React.lazy(() => import('./pages/LoginPage'));
 const MainLayout = React.lazy(() => import('./layouts/Main'));
-const AutoScrollToTop = React.lazy(() => import('./commons/components/AutoScrollToTop'));
+const AutoScrollToTop = React.lazy(() => import('./commons/components/utils/AutoScrollToTop'));
+const ErrorPage = React.lazy(() => import('./pages/ErrorPage'))
 
-const loadingFullPage = (
-  <div
-    style={{
-      height: "100vh",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      backgroundImage: "linear-gradient(to top, #48c6ef 0%, #6f86d6 100%)"
-    }}
-  >
-    <LoadingComponent />
-  </div>
-)
-
-function Container() {
+function Container(props) {
   return (
-    <ErrorBoundary>
-      <Suspense fallback={loadingFullPage}>
+    <Suspense fallback={<HeartLoading fullPage />}>
+      <AutoScrollToTop>
 
-        <MainLayout adminRoutes={["/admin"]} frontPageRoutes={["/home", "/", "/courses", "/login"]}>
-          <AutoScrollToTop>
-            <Switch>
+        <Switch>
+          <Route path={["/blog", "/about", "/pages", "/contact"]}>
+            <ErrorPage type="comingsoon" />
+          </Route>
 
-              <Route path={["/home", "/"]}>
-                <HomePage />
-              </Route>
+          <Route exact path={["/", "/courses", "/login"]}>
+            <MainLayout>
+              <Switch>
+                <Route exact path="/">
+                  <HomePage />
+                </Route>
 
-              <Route path="/courses">
-                <CoursesPage />
-              </Route>
+                <Route path="/courses">
+                  <CoursesPage />
+                </Route>
 
-              <Route path="/login">
-                <LoginPage />
-              </Route>
+                <Route path="/login">
+                  <LoginPage />
+                </Route>
+              </Switch>
+            </MainLayout>
+          </Route>
 
-              <Route>
-                <h2 style={{ textAlign: 'center', padding: 100 }}>Not Thing Yet</h2>
-              </Route>
+          <Route>
+            <ErrorPage type="404" />
+          </Route>
 
-            </Switch>
-          </AutoScrollToTop>
-        </MainLayout>
+        </Switch>
 
-      </Suspense>
-    </ErrorBoundary>
+      </AutoScrollToTop>
+    </Suspense>
   );
 }
 

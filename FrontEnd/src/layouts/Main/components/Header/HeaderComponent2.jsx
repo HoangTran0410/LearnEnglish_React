@@ -14,6 +14,7 @@ const userMenu = (
     <Menu.Item key="cai dat">
       <Icon type="setting" /> Cài đặt
     </Menu.Item>
+    <Menu.Divider />
     <Menu.Item key="dang xuat">
       <Icon type="logout" /> Đăng xuất
     </Menu.Item>
@@ -45,7 +46,8 @@ export default class HeaderComponent2 extends Component {
     this.setState({ showSearch: !this.state.showSearch });
   };
 
-  toogleSideMenu = () => {
+  toogleSideMenu = e => {
+    if (e) e.preventDefault();
     this.setState({ showSideMenu: !this.state.showSideMenu });
   };
 
@@ -68,7 +70,7 @@ export default class HeaderComponent2 extends Component {
                     <div className="top_bar_content d-flex flex-row align-items-center justify-content-start">
                       <ul className="top_bar_contact_list">
                         <li>
-                          <div className="question">Have any questions?</div>
+                          <div className="question">Cần chúng tôi hỗ trợ?</div>
                         </li>
                         <li>
                           <Icon type="phone" theme="filled" />
@@ -107,7 +109,7 @@ export default class HeaderComponent2 extends Component {
                     <nav className="main_nav_contaner ml-auto">
                       <ul className="main_nav">
                         <li>
-                          <NavLink exact to="/home" activeClassName="active">
+                          <NavLink exact to="/" activeClassName="active">
                             Trang chủ
                           </NavLink>
                         </li>
@@ -126,16 +128,16 @@ export default class HeaderComponent2 extends Component {
                             Blog
                           </NavLink>
                         </li>
-                        {/* <li>
-                          <NavLink to="/page" activeClassName="active">
-                            Trang
+                        <li>
+                          <NavLink to="/pages" activeClassName="active">
+                            Pages
                           </NavLink>
                         </li>
                         <li>
                           <NavLink to="/contact" activeClassName="active">
                             Liên hệ
                           </NavLink>
-                        </li> */}
+                        </li>
                       </ul>
                       <div
                         className="search_button"
@@ -144,13 +146,17 @@ export default class HeaderComponent2 extends Component {
                         <Icon type="search" />
                       </div>
 
-                      {/* <!-- Hamburger --> */}
-                      <Dropdown overlay={userMenu} placement="bottomCenter">
+                      <Dropdown
+                        overlay={userMenu}
+                        trigger={["click"]}
+                        placement="bottomCenter"
+                      >
                         <div className="user">
                           <Icon type="user" />
                         </div>
                       </Dropdown>
 
+                      {/* <!-- Hamburger --> */}
                       <div
                         className="hamburger menu_mm"
                         onClick={this.toogleSideMenu}
@@ -174,10 +180,10 @@ export default class HeaderComponent2 extends Component {
                       <input
                         type="search"
                         className="search_input"
-                        placeholder="Search"
+                        placeholder="Tìm kiếm khoá học"
                         required="required"
                       />
-                      <button className="header_search_button d-flex flex-column align-items-center justify-content-center">
+                      <button className="header_search_button d-flex flex-column align-items-center justify-content-center trans_200">
                         <Icon type="search" />
                       </button>
                     </form>
@@ -207,7 +213,7 @@ export default class HeaderComponent2 extends Component {
               <input
                 type="search"
                 className="search_input"
-                placeholder="Search"
+                placeholder="Tìm kiếm khoá học"
                 required="required"
               />
               <button className="header_search_button d-flex flex-column align-items-center justify-content-center menu_mm">
@@ -216,9 +222,9 @@ export default class HeaderComponent2 extends Component {
             </form>
           </div>
           <nav className="menu_nav">
-            <ul>
+            <ul onClick={this.toogleSideMenu}>
               <li>
-                <NavLink exact to="/home" activeClassName="active">
+                <NavLink exact to="/" activeClassName="active">
                   Trang chủ
                 </NavLink>
               </li>
@@ -237,16 +243,16 @@ export default class HeaderComponent2 extends Component {
                   Blog
                 </NavLink>
               </li>
-              {/* <li>
-                <NavLink to="/page" activeClassName="active">
-                  Page
+              <li>
+                <NavLink to="/pages" activeClassName="active">
+                  Pages
                 </NavLink>
               </li>
               <li>
                 <NavLink to="/contact" activeClassName="active">
                   Liên hệ
                 </NavLink>
-              </li> */}
+              </li>
             </ul>
           </nav>
         </div>
