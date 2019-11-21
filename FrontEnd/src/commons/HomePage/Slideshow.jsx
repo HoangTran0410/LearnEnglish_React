@@ -1,5 +1,5 @@
 import React from "react";
-import { Icon } from "antd";
+// import { Icon } from "antd";
 
 const img = require("../../assets/images/slider/home_slider_1.jpg");
 const img2 = require("../../assets/svg animations/ball-wed.svg");
@@ -52,9 +52,9 @@ export default function Slideshow() {
                           <option>Chủ đề 2</option>
                         </select>
                         <select className="dropdown_item_select home_search_input">
-                          <option>Chọn giá</option>
-                          <option>Miễn phí</option>
-                          <option>Trả phí</option>
+                          <option>Loại</option>
+                          <option>Mới nhất</option>
+                          <option>Nổi nhất</option>
                         </select>
                       </div>
                       <button type="submit" className="home_search_button">

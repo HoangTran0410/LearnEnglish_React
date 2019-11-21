@@ -7,9 +7,6 @@ export default function Newletter() {
     <div className="newsletter">
       <div
         className="newsletter_background parallax-window"
-        // data-parallax="scroll"
-        // data-image-src="images/newsletter.jpg"
-        // data-speed="0.8"
         style={{
           backgroundImage:
             "url(" + require("../../assets/images/footer/newsletter.jpg") + ")"

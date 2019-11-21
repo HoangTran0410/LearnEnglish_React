@@ -25,7 +25,7 @@ const about_data = [
 const SingleAbout = props => (
   <div className="about_item">
     <div className="about_item_image">
-      <img src={props.data.image} alt="" />
+      <img className="trans_500" src={props.data.image} alt="" />
     </div>
     <div className="about_item_title">
       <p>{props.data.title}</p>

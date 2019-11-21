@@ -2,7 +2,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
-import CourseCard from "./CourseCard";
+import CourseCard from "../components/CourseCard";
 import { courses } from "../../utils/fakedata";
 
 export default class PopularCourses extends Component {
@@ -38,7 +38,7 @@ export default class PopularCourses extends Component {
           <div className="row">
             <div className="col">
               <div className="courses_button trans_200">
-                <Link to="/courses">view all courses</Link>
+                <Link to="/courses">tất cả khoá học</Link>
               </div>
             </div>
           </div>
