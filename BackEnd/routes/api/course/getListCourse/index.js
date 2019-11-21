@@ -9,11 +9,10 @@ getListCourse.get('/getListCourse',async (req, res, next) => {
     let pageIndex = req.query.pageIndex || 1;
     let pageSize = req.query.pageSize || 10;
     let topicID = req.query.topicID;
-    let courseID = req.query.courseID;
     var totalCourse;
     let titleCourse = req.query.title;
 
-    var sql = 'SELECT * FROM course ';
+    var sql = 'SELECT co.ID CourseID ,co.Title CourseTitle, tp.Title TopicTitle, tp.ID TopicID, co.Picture, co.Level, co.Description, co.WhatWillYouLearn, co.Requirement, COUNT(re.ID) as TotalMember FROM record re JOIN course co  ON co.ID = re.CourseID JOIN topic tp ON tp.ID = co.TopicID ';
     // Begin filter 
     if (topicID) {
         sql = util.andWhere(sql, 'TopicID', '=', topicID);
@@ -21,10 +20,6 @@ getListCourse.get('/getListCourse',async (req, res, next) => {
 
     if (titleCourse) {
         sql = util.andWhere(sql, 'Title', 'LIKE', '"%' + titleCourse + '%"');
-    }
-
-    if (courseID) {
-        sql = util.andWhere(sql, 'ID', '=', courseID);
     }
 
     //end filter course       
@@ -49,15 +44,25 @@ getListCourse.get('/getListCourse',async (req, res, next) => {
     let totalPage = Math.ceil((totalCourse) / pageSize);
     // console.log("total page:", totalPage);
     let pageLimitBegin = (pageIndex - 1) * pageSize;
-    sql += ' LIMIT ' + pageLimitBegin + ', ' + pageSize;
+    sql += 'GROUP BY co.ID LIMIT ' + pageLimitBegin + ', ' + pageSize;
     //End pagination
     //Begin get course 
     connection.query(sql, function (error, results, fields) {
-        data = {
-            listCourse: results,
-            totalPage: totalPage
+        if(error){
+            console.log('ERROR getlistcourse line 57');
+            res.send({
+                status : 0,
+                error : 400
+            })
         }
-        res.send(data);
+        else{
+
+            data = {
+                listCourse: results,
+                total: totalPage
+            }
+            res.send(data);
+        }
     });
     //End
 });
