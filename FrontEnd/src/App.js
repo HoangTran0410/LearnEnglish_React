@@ -1,47 +1,62 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import {
-  BrowserRouter as Router,
   Switch,
   Route,
-  Redirect
+  HashRouter
 } from "react-router-dom";
 
-import HomePage from './pages/HomePage';
-import CoursesPage from './pages/CoursesPage';
-import LoginPage from './pages/LoginPage';
-import MainLayout from './layouts/Main';
-import AutoScrollToTop from './commons/components/AutoScrollToTop';
+import HeartLoading from './commons/components/HeartLoading';
 
-function App() {
+const HomePage = React.lazy(() => import('./pages/HomePage'));
+const CoursesPage = React.lazy(() => import('./pages/CoursesPage'));
+const LoginPage = React.lazy(() => import('./pages/LoginPage'));
+const MainLayout = React.lazy(() => import('./layouts/Main'));
+const AutoScrollToTop = React.lazy(() => import('./commons/components/utils/AutoScrollToTop'));
+const ErrorPage = React.lazy(() => import('./pages/ErrorPage'))
+
+function Container(props) {
   return (
-    <Router>
+    <Suspense fallback={<HeartLoading fullPage />}>
       <AutoScrollToTop>
+
         <Switch>
-          <Route exact path="/">
-            <Redirect replace to="/home" />
+          <Route path={["/blog", "/about", "/pages", "/contact"]}>
+            <ErrorPage type="comingsoon" />
           </Route>
 
-          <Route path="/home">
+          <Route exact path={["/", "/courses", "/login"]}>
             <MainLayout>
-              <HomePage />
+              <Switch>
+                <Route exact path="/">
+                  <HomePage />
+                </Route>
+
+                <Route path="/courses">
+                  <CoursesPage />
+                </Route>
+
+                <Route path="/login">
+                  <LoginPage />
+                </Route>
+              </Switch>
             </MainLayout>
           </Route>
 
-          <Route path="/courses">
-            <MainLayout>
-              <CoursesPage />
-            </MainLayout>
+          <Route>
+            <ErrorPage type="404" />
           </Route>
 
-          <Route path="/login">
-            <MainLayout>
-              <LoginPage />
-            </MainLayout>
-          </Route>
         </Switch>
+
       </AutoScrollToTop>
-    </Router>
+    </Suspense>
   );
 }
+
+const App = () => (
+  <HashRouter>
+    <Container />
+  </HashRouter>
+);
 
 export default App;

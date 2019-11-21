@@ -1,17 +1,20 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { Fragment } from "react";
 import { BackTop } from "antd";
 
-import Header from "./components/Header";
-import Footer from "./components/Footer";
+const Header = React.lazy(() => import("./components/Header"));
+const Footer = React.lazy(() => import("./components/Footer"));
+const NewLetter = React.lazy(() => import("../../commons/HomePage/Newletter"));
 
-export default function MainLayout(props) {
+function MainLayout(props) {
   return (
     <Fragment>
       <Header />
-      {props.children}
+      <div style={{ margin: "130px auto 0" }}>{props.children}</div>
       <BackTop visibilityHeight={200} />
+      <NewLetter />
       <Footer />
     </Fragment>
   );
 }
+
+export default MainLayout;

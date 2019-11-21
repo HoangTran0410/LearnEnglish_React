@@ -1,33 +1,34 @@
 import React from "react";
-import { Icon, Avatar } from "antd";
-// import { NavLink } from "react-router-dom";
+import { Icon } from "antd";
+import { Link } from "react-router-dom";
 
-const testBackend = () => {};
+// const testBackend = () => {};
 
 const CourseCard = props => {
   const {
-    image,
-    title,
-    teacher,
-    students_count,
-    overview,
-    rating,
-    videos_count
+    ID,
+    Picture,
+    Title,
+    TopicID,
+    Description,
+    students_count = 0,
+    rating = 0,
+    videos_count = 0
   } = props.data;
-  // to="/courses"
+
   return (
-    <button onClick={testBackend} className="course trans_200">
+    <Link to={"/course?ID=" + ID} className="course trans_200">
       <div className="course_image">
-        <img src={image} alt="" />
+        <img src={Picture} alt="" />
       </div>
       <div className="course_body">
-        <h3 className="course_title">{title}</h3>
-        <div className="course_teacher">
-          <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />{" "}
-          {teacher}
+        <h3 className="course_title">{Title}</h3>
+        <div className="course_topic">
+          <Icon type="tag" />
+          {" " + TopicID}
         </div>
         <div className="course_text">
-          <p>{overview}</p>
+          <p>{Description}</p>
         </div>
       </div>
       <div className="course_footer">
@@ -46,7 +47,7 @@ const CourseCard = props => {
           </div>
         </div>
       </div>
-    </button>
+    </Link>
   );
 };
 
