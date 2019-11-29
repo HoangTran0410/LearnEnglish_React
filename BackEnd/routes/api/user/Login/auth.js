@@ -25,30 +25,38 @@ auth.use(bodyParser.json());
 auth.post('/auth', function (request, response, next) {
     console.log('Da vao auth');  
     var userName = request.body.userName;
-    var passWord = request.body.passWord;
+    var password = request.body.password;
 
     console.log(userName);
-    if (userName && passWord) {
+    if (userName && password) {
 
         connection.query('SELECT * FROM account WHERE UserName = ?', [userName], function (error, results, fields) {
-            // Get list bytes encoded
-            var bytes = crypto.AES.decrypt(results[0].Password, secret.EncodePass);
-            
-            // Parse 
-            var decodePass = bytes.toString(crypto.enc.Utf8);
-            if (results.length > 0 && decodePass===decodePass) {
-                request.session.loggedin = true;
-                request.session.username = userName;
-                response.redirect('/home');
-            } else {
-                response.send('Incorrect Username and/or Password!');
+            //if error
+            if(results.length == 0 ) {
+                console.log("Not data");
+                response.send({
+                    status : 0
+                })
             }
-            response.end();
+            else {
+            // Get list bytes encoded
+                var bytes = crypto.AES.decrypt(results[0].Password, secret.EncodePass);
+                
+                // Parse 
+                var decodePass = bytes.toString(crypto.enc.Utf8);
+                if (results.length > 0 && decodePass===decodePass) {
+                    request.session.loggedin = true;
+                    request.session.username = userName;
+                    response.redirect('/home');
+                } else {
+                    response.send({
+                        status : 0
+                    });
+                }
+                response.end();
+            }
         });
-    } else {
-        response.send('Please enter Username and Password!');
-        response.end();
-    }
+    } 
 });
 
 auth.get('/home', function (request, response, next) {

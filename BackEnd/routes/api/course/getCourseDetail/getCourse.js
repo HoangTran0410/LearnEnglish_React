@@ -13,17 +13,28 @@ getCourse.get('/getCourse', (req, res, next) => {//input contain courseID
     let sql = 'SELECT *,AVG(ra.Star) as AVGstar FROM course co JOIN rate ra ON co.ID = ra.CourseID ';
     // Begin filter
     if (courseID) {
-        sql = util.andWhere(sql, 'ID', '=', courseID);
+        sql = util.andWhere(sql, 'co.ID', '=', courseID);
     }
     
     //end filter course      
     //Begin get course 
+ 
     connection.query(sql, function (error, results, fields) {
-        data = {
-            course: results   
+        if(error){
+            res.end("error");
+       //     console.log(sql);
+                 
         }
-        res.send(data);
+        else{
+            res.send({
+                course: results   
+            });
+            
+        }
     });
+    
+   
+    
     //End
 });
 
