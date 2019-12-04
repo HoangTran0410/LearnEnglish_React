@@ -6,7 +6,7 @@ var connection = util.connectMysql(); // Get connection from server my sql
 
 getListLecture.get('/getListLecture',async (req, res, next) => {//input contain courseID
 
-    
+    let data;
     let courseID = req.query.courseID;
 
 
@@ -19,9 +19,10 @@ getListLecture.get('/getListLecture',async (req, res, next) => {//input contain 
 
     //Begin get lecture
     connection.query(sql, function (error, results, fields) {
-        res.send({
+        data = {
             listLecture: results   
-        });
+        }
+        res.send(data);
     });
     //End get lecture
 });

@@ -3,8 +3,10 @@ var getHotCourse = express.Router();
 
 var util = require('../../../../Module/Util/util');
 var connection = util.connectMysql(); // Get connection from server my sql 
-var mysql = require('../../../../Module/Mysql/getData/index')
-getHotCourse.get('/getHotCourse',async(req, res, next) => {//Not parameter
+
+getHotCourse.get('/getHotCourse', (req, res, next) => {//Not parameter
+
+    let data;
 
     let sql = 'SELECT *,COUNT(re.ID) as TotalMember FROM course co JOIN record re ON co.ID = re.CourseID'+
     ' GROUP BY co.ID'+
@@ -12,11 +14,12 @@ getHotCourse.get('/getHotCourse',async(req, res, next) => {//Not parameter
     ' LIMIT 0,10';    
 
     //Begin get hot course
-    let result = await mysql.getData(sql);
-    
-    res.send({
-        listHotCourse : result
-    })
+    connection.query(sql, function (error, results, fields) {
+        data = {
+            listHotCourse: results
+        }
+        res.send(data);
+    });
     //End get hot course
 });
 

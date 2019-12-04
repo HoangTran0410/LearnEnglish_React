@@ -2,19 +2,11 @@ var express = require('express');
 var logout = express.Router();
 
 logout.get('/logout', function (request, response, next) {
-     
     if (request.session.loggedin) {
-       request.session.destroy();
-       response.send({
-           status : 1
-       })
+        response.send('Please fill password, ' + request.session.username + '!');
     } else {
-        response.send({
-            messeage : "Not login",
-            status : 0
-        });
+        response.send('is logout page');
     }
-    
     response.end();
 });
 

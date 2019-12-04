@@ -6,8 +6,7 @@ module.exports = function (app) {
     app.use(require('./api/user/Logout/index'));
     app.use(require('./api/user/SignUp/register'));
     app.use(require('./api/user/Profile/getProfile'));
-    app.use(require('./api/user/Profile/editProfile'));
-    app.use(require('./api/user/Logout'));    
+    app.use(require('./api/user/Profile/editProfile'));    
     //End user
     
     //Begin course
