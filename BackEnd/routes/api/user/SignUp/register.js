@@ -4,7 +4,6 @@ var register = express.Router();
 var fs = require('fs'); // Module file stream
 var bodyParser = require('body-parser');
 var session = require('express-session');
-var fs = require('fs');
 var crypto = require('crypto-js');
 
 var util = require('./../../../../Module/Util/util')
@@ -40,18 +39,21 @@ register.post('/register', function (req, res, next) {
             [userName, encodePassWord, fullName, birthday, email, 0];
         connection.query(sql, values, function (error, results) {
             if (error) {
+                console.log('Error at line 40 in registerc')
                 res.send({
                     status : 0
+                });    
+            }
+            else{
+                console.log("1 record inserted");
+                res.send({
+                    status : 1
                 });
-                return;
-            };
-            console.log("1 record inserted");
+            }
         });
 
     }
-    res.send({
-        status : 1
-    });
+    
 });
 
 module.exports = register;

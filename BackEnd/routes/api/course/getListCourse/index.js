@@ -1,30 +1,25 @@
-var express = require('express');
-var getListCourse = express.Router();
+var express = require('express')
+var getListCourse = express.Router()
 
 var util = require('../../../../Module/Util/util')
-var connection = util.connectMysql(); // Get connection from server my sql 
+var connection = util.connectMysql() // Get connection from server my sql 
 
 getListCourse.get('/getListCourse',async (req, res, next) => {
-    let data;
-    let pageIndex = req.query.pageIndex || 1;
-    let pageSize = req.query.pageSize || 10;
-    let topicID = req.query.topicID;
-    let courseID = req.query.courseID;
-    var totalCourse;
-    let titleCourse = req.query.title;
+    let data
+    let pageIndex = req.query.pageIndex || 1
+    let pageSize = req.query.pageSize || 10
+    let topicID = req.query.topicID
+    var totalCourse
+    let titleCourse = req.query.title
 
-    var sql = 'SELECT * FROM course ';
+    var sql = 'SELECT co.ID CourseID ,co.Title CourseTitle, tp.Title TopicTitle, tp.ID TopicID, co.Picture, co.Level, co.Description, co.WhatWillYouLearn, co.Requirement, COUNT(re.ID) as TotalMember FROM record re JOIN course co  ON co.ID = re.CourseID JOIN topic tp ON tp.ID = co.TopicID '
     // Begin filter 
     if (topicID) {
-        sql = util.andWhere(sql, 'TopicID', '=', topicID);
+        sql = util.andWhere(sql, 'TopicID', '=', topicID)
     }
 
     if (titleCourse) {
-        sql = util.andWhere(sql, 'Title', 'LIKE', '"%' + titleCourse + '%"');
-    }
-
-    if (courseID) {
-        sql = util.andWhere(sql, 'ID', '=', courseID);
+        sql = util.andWhere(sql, 'Title', 'LIKE', '"%' + titleCourse + '%"')
     }
 
     //end filter course       
@@ -35,31 +30,43 @@ getListCourse.get('/getListCourse',async (req, res, next) => {
     
             connection.query(sql, (error, results, field) => {
 
-            if(error) res.send(error);
+            if(error) res.send(error)
                 
-            resolve(results.length);
-            });
-        });
+            resolve(results.length)
+            })
+        })
     }
     //End get total row of course
-    totalCourse = await getTotalCourse();
+    totalCourse = await getTotalCourse()
 
-     console.log(totalCourse);
+     console.log(totalCourse)
     //Begin pagination
-    let totalPage = Math.ceil((totalCourse) / pageSize);
-    // console.log("total page:", totalPage);
-    let pageLimitBegin = (pageIndex - 1) * pageSize;
-    sql += ' LIMIT ' + pageLimitBegin + ', ' + pageSize;
+    let totalPage = Math.ceil((totalCourse) / pageSize)
+    // console.log("total page:", totalPage)
+    let pageLimitBegin = (pageIndex - 1) * pageSize
+    sql += 'GROUP BY co.ID LIMIT ' + pageLimitBegin + ', ' + pageSize
     //End pagination
     //Begin get course 
     connection.query(sql, function (error, results, fields) {
-        data = {
-            listCourse: results,
-            totalPage: totalPage
+        if(error){
+            console.log('ERROR getlistcourse line 57')
+            res.send({
+                status : 0,
+                error : 400
+            })
+            res.end()
         }
-        res.send(data);
-    });
-    //End
-});
+        else{
 
-module.exports = getListCourse;
+            res.send({
+                listCourse: results,
+                total: totalPage
+            })
+        }
+    res.end()
+    })
+    
+    //End
+})
+
+module.exports = getListCourse
