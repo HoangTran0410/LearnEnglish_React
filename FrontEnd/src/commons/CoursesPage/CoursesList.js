@@ -96,7 +96,6 @@ export default class CoursesList extends Component {
                   <Select.Option value="">Tất cả</Select.Option>
                   {
                     topics && topics.map((topic, index) => {
-                      console.log(topic)
                       return (
                         <Select.Option key={index} value={topic.ID}>{topic.name}</Select.Option>
                       )
