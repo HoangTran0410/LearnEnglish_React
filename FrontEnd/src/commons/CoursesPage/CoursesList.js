@@ -26,7 +26,7 @@ export default class CoursesList extends Component {
       courses: [],
       total: 0,
       pageIndex: 1,
-      pageSize: 1,
+      pageSize: 2,
 
       title: ''
     }
