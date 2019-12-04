@@ -29,41 +29,27 @@ export const courses = [
 
 export const topics = [
   {
+    ID: 0,
     name: "Ielts",
-    image: ""
+    image: "",
   },
   {
+    ID: 1,
     name: "Toeic 2 kỹ năng",
     image: ""
   },
   {
+    ID: 2,
     name: "Giao tiếp cơ bản",
     image: ""
   },
   {
+    ID: 4,
     name: "Văn bằng B",
     image: ""
   },
   {
-    name: "Toeic 4 kỹ năng",
-    image: ""
-  }, {
-    name: "Ielts",
-    image: ""
-  },
-  {
-    name: "Toeic 2 kỹ năng",
-    image: ""
-  },
-  {
-    name: "Giao tiếp cơ bản",
-    image: ""
-  },
-  {
-    name: "Văn bằng B",
-    image: ""
-  },
-  {
+    ID: 5,
     name: "Toeic 4 kỹ năng",
     image: ""
   }
@@ -92,6 +78,6 @@ export const getLatestCourses = async (count = 5) => {
 }
 
 export const getPopularTopics = async (count = 5) => {
-  // await sleep(750);
+  await sleep(750);
   return topics.slice(0, count);
 }

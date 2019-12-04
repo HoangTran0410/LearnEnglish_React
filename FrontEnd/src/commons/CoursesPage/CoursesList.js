@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { Pagination, Input, Collapse, Button } from 'antd';
+import { Pagination, Input, Collapse, Select } from 'antd';
 
-import { getCourses } from '../../utils/fakedata';
+import { topics } from '../../utils/fakedata';
 import API from '../../utils/callAPI';
 import CourseCard from '../components/CourseCard';
 
@@ -44,10 +44,7 @@ export default class CoursesList extends Component {
 
     // get list from API
     const { pageIndex, pageSize, title } = this.state;
-    // const api_result = await getCourses(pageIndex, pageSize);
-
     const api_result = await API.getListCourses({ pageIndex, pageSize, title });
-    console.log("TCL: CoursesList -> getListCourses -> api_test", api_result)
 
     this.setState({
       courses: api_result.listCourse,
@@ -76,32 +73,36 @@ export default class CoursesList extends Component {
 
   render() {
     const { pageIndex, pageSize, courses, total, loading, title } = this.state;
-
+    console.log(topics)
     return (
       <>
         {/* Search */}
         <div className="courses_search_container row">
-          <div className="col-lg-4">
-            <Input
+          <div className="col-lg-6">
+            <Input.Search
               size="large"
+              enterButton="Tìm"
               value={title}
-              placeholder="Tìm theo tên"
+              placeholder="Tìm theo tên Khoá học"
               onChange={(e) => this.setState({ title: e.target.value })}
+              onSearch={this.getListCourses}
             />
           </div>
-          <div className="col-lg-2 text-center">
-            <Button
-              style={{ width: '100%' }}
-              type="primary"
-              icon="search"
-              size="large"
-              onClick={this.getListCourses}
-            >Tìm</Button>
-          </div>
+
           <div className="col-lg-6">
             <Collapse bordered={false}>
               <Panel header="Tìm kiếm nâng cao" style={customPanelStyle}>
-
+                <Select placeholder="Chọn chủ đề" style={{ width: '100%' }}>
+                  <Select.Option value="">Tất cả</Select.Option>
+                  {
+                    topics && topics.map((topic, index) => {
+                      console.log(topic)
+                      return (
+                        <Select.Option key={index} value={topic.ID}>{topic.name}</Select.Option>
+                      )
+                    })
+                  }
+                </Select>
               </Panel>
             </Collapse>
           </div>
