@@ -26,7 +26,7 @@ export default class HomePage extends Component {
         <Features />
         <About />
         <PopularCourses />
-        <UpcomingEvents />
+        {/* <UpcomingEvents /> */}
         <Counter />
         <Team />
       </Suspense>
